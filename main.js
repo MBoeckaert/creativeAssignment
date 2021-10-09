@@ -9,10 +9,10 @@ const config = {
     height: 600,
     physics: {
         default: `arcade`,
-        // arcade: {
-        //     debug: true,
-        //     gravity: {y:600}
-        // }
+        arcade: {
+            debug: true,
+            gravity: {y:600}
+        }
     },
     scene: [Boot, Game]
 }

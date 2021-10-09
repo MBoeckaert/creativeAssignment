@@ -9,7 +9,7 @@ export default class Boot extends Phaser.Scene {
 
     preload(){
         this.load.image(`bg`, `assets/background2d.png`);
-        this.load.image(`princess`, `assets/characters.png`);
+        this.load.spritesheet(`princess`, `assets/characters.png`, {frameWidth: 32, frameHeight: 128});
         this.load.image(`monster`, `assets/monsters-0.png`);
         this.load.image(`fire`, `assets/fire.png`);
         this.load.image(`floor`, `assets/groundFloor.png`);
