@@ -8,8 +8,8 @@ export default class Boot extends Phaser.Scene {
     }
 
     preload(){
-        // this.load.image(`bg`, `assets/background2d.png`);
-        this.load.image(`princess`, `assets/mainCharacters.png`);
+        this.load.image(`bg`, `assets/background2d.png`);
+        this.load.image(`princess`, `assets/characters.png`);
 
         this.load.on(`complete`, () => {
             this.scene.start(`play`);
