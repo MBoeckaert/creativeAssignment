@@ -7,6 +7,8 @@ export default class Game extends Phaser.Scene {
         });
     }
 
+    //add sound
+    //https://www.epidemicsound.com/music/genres/video-games/
 
     create(){
         //1. add assets from Boot
