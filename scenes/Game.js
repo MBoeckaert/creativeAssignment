@@ -11,8 +11,20 @@ export default class Game extends Phaser.Scene {
     create(){
         //add assets from Boot
         this.bg = this.add.image(400,300, `bg`);
-        this.princess = this.physics.add.sprite(50, 400, `princess`);
-        this.princess.setScale(0.5);
+        //set floor platform
+        // this.floor = this.add.image(50,590, `floor`);
+        this.platforms = this.physics.add.staticGroup();
+        this.platforms.create(60, 590, `floor`).setScale(2).refreshBody();
+        //make floor a platform and repeat it over screen
+        this.floatingFloor = this.add.image(650,450, `floatingFloor`);
+        this.fire = this.add.image(450, 590, `fire`);
+        this.princess = this.physics.add.sprite(50, 400, `princess`);  this.princess.setScale(0.5);
+        this.monster = this.physics.add.sprite(500, 400, `monster`);
+
+        //physics methods
+        this.princess.setVelocity(100,200);
+        this.princess.setCollideWorldBounds(true);
+        this.monster.setCollideWorldBounds(true);
 
         //get keyboard input
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -25,12 +37,10 @@ export default class Game extends Phaser.Scene {
         //key Down
         this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
 
-        //physics methods
-        this.princess.setVelocity(100,200);
-        this.princess.setCollideWorldBounds(true);
     }
 
     update(){
+        //create Movement
         this.princess.setVelocity(0);
 
         if (this.cursors.left.isDown || this.keyA.isDown)
