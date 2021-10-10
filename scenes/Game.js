@@ -4,7 +4,8 @@ export default class Game extends Phaser.Scene {
     constructor(){
         super({
             key: `play`
-        });
+        }),
+        this.gameOver = false;
     }
 
     //add sound
@@ -20,7 +21,7 @@ export default class Game extends Phaser.Scene {
         this.princess.setScale(0.4);
         //monster
         this.monster = this.physics.add.sprite(680, 500, `monster`);
-        
+
         this.creatingPlatforms();
         this.creatingMovablePlatforms();
         this.creatingFire();
@@ -77,6 +78,7 @@ export default class Game extends Phaser.Scene {
         this.physics.add.collider(this.princess, this.floatingFloor);
         this.physics.add.collider(this.monster, this.platforms);
             //need interactions between princess and monsters => game reset
+        this.physics.add.collider(this.princess, this.monster, this.hitMonster, null, this);
     }
 
     playerControls(){
@@ -134,6 +136,12 @@ export default class Game extends Phaser.Scene {
         {
             this.monster.setVelocityX(75);
         }
+    }
+
+    hitMonster(player, bomb){
+        this.physics.pause();
+        player.setTint(0xff0000);
+        this.gameOver = true;
     }
 
 }
