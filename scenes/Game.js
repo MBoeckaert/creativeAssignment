@@ -37,11 +37,11 @@ export default class Game extends Phaser.Scene {
         this.princess.setBounce(0.2) ;
         this.princess.setScale(0.4);
             //monster
-        this.monster = this.physics.add.sprite(549, 500, `monster`);
+        this.monster = this.physics.add.sprite(680, 500, `monster`);
 
         //2. colliding interactions
         this.physics.add.collider(this.princess, this.platforms);
-        // this.physics.add.collider(this.princess, this.floatingFloor);
+        this.physics.add.collider(this.princess, this.floatingFloor);
         this.physics.add.collider(this.monster, this.platforms);
             //need interactions between princess and monsters => game reset
 
@@ -83,22 +83,22 @@ export default class Game extends Phaser.Scene {
         }
 
         //Create Moving Platform
-        if (this.floatingFloor.x >= 350)
+        if (this.floatingFloor.x >= 370)
         {
             this.floatingFloor.setVelocityX(-50);
         }
-        else if (this.floatingFloor.x <= 250)
+        else if (this.floatingFloor.x <= 300)
         {
             this.floatingFloor.setVelocityX(50);
         }
 
         //Create Moving Monster
         // this.monster.setVelocityX(50);
-        if (this.monster.x >= 675)
+        if (this.monster.x >= 650)
         {
             this.monster.setVelocityX(-75);
         }
-        else if (this.monster.x <= 550)
+        else if (this.monster.x <= 425)
         {
             this.monster.setVelocityX(75);
         }
