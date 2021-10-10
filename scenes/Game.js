@@ -14,26 +14,36 @@ export default class Game extends Phaser.Scene {
         //1. add assets from Boot
         this.bg = this.add.image(0,0, `bg`);
         Phaser.Display.Align.In.Center(this.bg, this.add.zone(400, 300, 800, 600));
-            //set floor platform
-        this.platforms = this.physics.add.staticGroup();
-            this.platforms.create(50, 590, 'floor').setScale(2).refreshBody(); //refreshBody() doesn't work
+            //set floor platforms
+            this.platforms = this.physics.add.staticGroup();
+            this.platforms.create(128, 590, 'floor').setScale(2).refreshBody(); //refreshBody() doesn't work
+            this.platforms.create(544, 590, `floor`).setScale(2).refreshBody();
+            this.platforms.create(800, 590, `floor`).setScale(2).refreshBody();
+            // for(let x = 0; x < 4; x++){
+            //     this.platforms.create( x * 128, 560, `floor`).setScale(2).setOrigin(0);
+            // }
             //Make a movable platform
-            this.floatingFloor = this.physics.add.image(250,500, `floatingFloor`);
+            this.floatingFloor = this.physics.add.image(250,475, `floatingFloor`);
             this.floatingFloor.setImmovable(true);
             this.floatingFloor.body.allowGravity = false;
             this.floatingFloor.setVelocityX(50);
             //fire
-        this.fire = this.add.image(200, 590, `fire`);
+        this.fire = this.add.image(276, 590, `fire`);
+        this.fire = this.add.image(316, 590, `fire`);
+        this.fire = this.add.image(356, 590, `fire`);
+        this.fire = this.add.image(396, 590, `fire`);
             //princess
         this.princess = this.physics.add.sprite(50, 400, `princess`); 
         this.princess.setBounce(0.2) ;
-        this.princess.setScale(0.5);
+        this.princess.setScale(0.4);
             //monster
         this.monster = this.physics.add.sprite(549, 500, `monster`);
 
         //2. colliding interactions
         this.physics.add.collider(this.princess, this.platforms);
-        this.physics.add.collider(this.princess, this.floatingFloor);
+        // this.physics.add.collider(this.princess, this.floatingFloor);
+        this.physics.add.collider(this.monster, this.platforms);
+            //need interactions between princess and monsters => game reset
 
         //3. physics methods
         // this.princess.setVelocity(100,200);
@@ -58,18 +68,18 @@ export default class Game extends Phaser.Scene {
         //create Player Movement
         if (this.cursors.left.isDown || this.keyA.isDown)
         {
-            this.princess.setVelocityX(-160);
+            this.princess.setVelocityX(-100);
         }
         else if (this.cursors.right.isDown || this.keyE.isDown)
         {
-            this.princess.setVelocityX(160);
+            this.princess.setVelocityX(100);
         }else{
             this.princess.setVelocityX(0);
         }
 
         if ((this.cursors.up.isDown && this.princess.body.touching.down) || (this.keyZ.isDown && this.princess.body.touching.down))
         {
-            this.princess.setVelocityY(-225);
+            this.princess.setVelocityY(-245);
         }
 
         //Create Moving Platform
