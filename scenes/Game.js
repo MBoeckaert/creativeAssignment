@@ -58,10 +58,11 @@ export default class Game extends Phaser.Scene {
 
     creatingFire(){
         //fire
-        this.fire = this.add.image(276, 590, `fire`);
-        this.fire = this.add.image(316, 590, `fire`);
-        this.fire = this.add.image(356, 590, `fire`);
-        this.fire = this.add.image(396, 590, `fire`);
+        this.fire = this.physics.add.staticGroup();
+        this.fire.create(276, 590, `fire`).refreshBody();
+        this.fire.create(316, 590, `fire`).refreshBody();
+        this.fire.create(356, 590, `fire`).refreshBody();
+        this.fire.create(396, 590, `fire`).refreshBody();
     }
 
     gamePhysics(){
@@ -79,6 +80,7 @@ export default class Game extends Phaser.Scene {
         this.physics.add.collider(this.monster, this.platforms);
             //need interactions between princess and monsters => game reset
         this.physics.add.collider(this.princess, this.monster, this.hitMonster, null, this);
+        this.physics.add.collider(this.princess, this.fire, this.hitMonster, null, this);
     }
 
     playerControls(){
@@ -143,5 +145,11 @@ export default class Game extends Phaser.Scene {
         player.setTint(0xff0000);
         this.gameOver = true;
     }
+
+    // hitFire(player, fire){
+    //     this.physics.pause();
+    //     player.setTint(0xff0000);
+    //     this.gameOver = true;
+    // }
 
 }
