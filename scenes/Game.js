@@ -21,10 +21,13 @@ export default class Game extends Phaser.Scene {
         this.princess.setScale(0.4);
         //monster
         this.monster = this.physics.add.sprite(680, 500, `monster`);
-        //gameOver text
-        this.gameOverText = this.add.text(400, 300, `Game Over`, {fontSize: `128px`, fill: `#ff0000`});
+        //gameOver & play again text
+        this.gameOverText = this.add.text(400, 300, `Game Over`, {fontSize: `128px`, fill: `#ff0000`}).setInteractive({cursor: `pointer`});
         this.gameOverText.setOrigin(0.5);
         this.gameOverText.visible = false;
+        this.playAgain = this.add.text(400, 350, `click to play again`, {fontSize: `32px`, fill: `#ffff`}).setInteractive({cursor: `pointer`});
+        this.playAgain.setOrigin(0.5, 0);
+        this.playAgain.visible = false;
 
         this.creatingPlatforms();
         this.creatingMovablePlatforms();
@@ -144,11 +147,18 @@ export default class Game extends Phaser.Scene {
         }
     }
 
+    //Pause game when hit
+    //Restart
     hitMonster(player, bomb){
         this.physics.pause();
         player.setTint(0xff0000);
         this.gameOver = true;
         this.gameOverText.visible = true;
+        this.playAgain.visible = true;
+
+        this.input.on(`pointerdown`, () => {
+            this.scene.start(`loadingscreen`);
+        });
     }
 
     // hitFire(player, fire){

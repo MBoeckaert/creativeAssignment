@@ -12,7 +12,7 @@ export default class LoadingScreen extends Phaser.Scene {
         });
 
         //text
-        this.startClick = this.add.text(400, 300, `Click to Start`, {fontSize: `64px`, fill: `#ffff`});
+        this.startClick = this.add.text(400, 300, `Start Game`, {fontSize: `64px`, fill: `#ffff`}).setInteractive({cursor: `pointer`});
         this.startClick.setOrigin(0.5);
     }
 }
