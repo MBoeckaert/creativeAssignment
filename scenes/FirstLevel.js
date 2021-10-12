@@ -1,9 +1,9 @@
 
 
-export default class Game extends Phaser.Scene {
+export default class FirstLevel extends Phaser.Scene {
     constructor(){
         super({
-            key: `play`
+            key: `level1`
         }),
         this.gameOver = false;
     }
@@ -29,6 +29,9 @@ export default class Game extends Phaser.Scene {
         this.playAgain.setOrigin(0.5, 0);
         this.playAgain.visible = false;
 
+        //create a hitzone
+        this.hitNextLevel = this.physics.add.sprite(750, 550, `test`);
+
         this.creatingPlatforms();
         this.creatingMovablePlatforms();
         this.creatingFire();
@@ -36,6 +39,7 @@ export default class Game extends Phaser.Scene {
         this.gamePhysics();
         this.collidingInteractions();
         this.playerControls();
+
     }
 
     update(){
@@ -78,6 +82,8 @@ export default class Game extends Phaser.Scene {
         this.princess.setBounce(0.2);
         this.princess.setCollideWorldBounds(true);
         this.monster.setCollideWorldBounds(true);
+
+        this.hitNextLevel.setCollideWorldBounds(true);
     }
 
     collidingInteractions(){
@@ -85,9 +91,12 @@ export default class Game extends Phaser.Scene {
         this.physics.add.collider(this.princess, this.platforms);
         this.physics.add.collider(this.princess, this.floatingFloor);
         this.physics.add.collider(this.monster, this.platforms);
-            //need interactions between princess and monsters => game reset
+            
         this.physics.add.collider(this.princess, this.monster, this.hitMonster, null, this);
         this.physics.add.collider(this.princess, this.fire, this.hitMonster, null, this);
+
+        //collision is going to level 2
+        this.physics.add.collider(this.princess, this.hitNextLevel, this.levelTwo, null, this);
     }
 
     playerControls(){
@@ -161,10 +170,8 @@ export default class Game extends Phaser.Scene {
         });
     }
 
-    // hitFire(player, fire){
-    //     this.physics.pause();
-    //     player.setTint(0xff0000);
-    //     this.gameOver = true;
-    // }
+    levelTwo(){
+        this.scene.start(`level2`);
+    }
 
 }

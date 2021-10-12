@@ -1,5 +1,4 @@
 
-
 export default class Boot extends Phaser.Scene {
     constructor(){
         super({
@@ -14,6 +13,8 @@ export default class Boot extends Phaser.Scene {
         this.load.image(`fire`, `assets/fire.png`);
         this.load.image(`floor`, `assets/groundFloor.png`);
         this.load.image(`floatingFloor`, `assets/floatingFloor.png`);
+
+        this.load.image(`test`, `assets/characters-2.png`);
 
         this.load.on(`complete`, () => {
             // this.scene.start(`play`);
