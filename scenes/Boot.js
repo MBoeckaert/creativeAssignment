@@ -16,8 +16,9 @@ export default class Boot extends Phaser.Scene {
         this.load.image(`floatingFloor`, `assets/floatingFloor.png`);
 
         this.load.on(`complete`, () => {
-            this.scene.start(`play`);
-        } )
+            // this.scene.start(`play`);
+            this.scene.start(`loadingscreen`);
+        });
     }
 
     create(){

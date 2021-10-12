@@ -1,6 +1,7 @@
 // "use strict";
 
 import Boot from "./scenes/Boot.js";
+import LoadingScreen from "./scenes/LoadingScreen.js";
 import Game from "./scenes/Game.js";
 
 const config = {
@@ -14,7 +15,7 @@ const config = {
             gravity: {y:300}
         }
     },
-    scene: [Boot, Game]
+    scene: [Boot, LoadingScreen, Game]
 }
 
 let game = new Phaser.Game(config);
