@@ -29,7 +29,7 @@ export default class FirstLevel extends Phaser.Scene {
         this.playAgain.setOrigin(0.5, 0);
         this.playAgain.visible = false;
 
-        //create a hitzone
+        //create a hitzone BIG SPRITE
         this.hitNextLevel = this.physics.add.sprite(750, 550, `test`);
 
         this.creatingPlatforms();
@@ -171,7 +171,7 @@ export default class FirstLevel extends Phaser.Scene {
     }
 
     levelTwo(){
-        this.scene.start(`level2`);
+        this.scene.start(`textLoadlvl2`);
     }
 
 }
