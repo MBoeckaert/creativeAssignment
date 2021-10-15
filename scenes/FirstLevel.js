@@ -1,5 +1,3 @@
-
-
 export default class FirstLevel extends Phaser.Scene {
     constructor(){
         super({
@@ -16,12 +14,12 @@ export default class FirstLevel extends Phaser.Scene {
         this.bg = this.add.image(0,0, `bg`);
         Phaser.Display.Align.In.Center(this.bg, this.add.zone(400, 300, 800, 600));
         //princess
-        this.princess = this.physics.add.sprite(50, 400, `princess`); 
-        this.princess.setBounce(0.2) ;
-        this.princess.setScale(0.4);
+        this.princess = this.physics.add.sprite(50, 750, `princess`);
+        this.princess.setScale(0.3);
         //monster
         this.monster = this.physics.add.sprite(680, 500, `monster`);
-        //gameOver & play again text
+        //all the text
+        this.gameInfo = this.add.text(20, 20, `Level 1`, {fontSize: `16px`, fill: `#ffff`})
         this.gameOverText = this.add.text(400, 300, `Game Over`, {fontSize: `128px`, fill: `#ff0000`}).setInteractive({cursor: `pointer`});
         this.gameOverText.setOrigin(0.5);
         this.gameOverText.visible = false;
@@ -54,14 +52,11 @@ export default class FirstLevel extends Phaser.Scene {
         this.platforms.create(128, 590, 'floor').setScale(2).refreshBody(); //refreshBody() doesn't work
         this.platforms.create(544, 590, `floor`).setScale(2).refreshBody();
         this.platforms.create(800, 590, `floor`).setScale(2).refreshBody();
-        // for(let x = 0; x < 4; x++){
-        //     this.platforms.create( x * 128, 560, `floor`).setScale(2).setOrigin(0);
-        // }
     }
-
+    
     creatingMovablePlatforms(){
         //Make a movable platform
-        this.floatingFloor = this.physics.add.image(250,475, `floatingFloor`);
+        this.floatingFloor = this.physics.add.image(250,500, `floatingFloor`);
         this.floatingFloor.setImmovable(true);
         this.floatingFloor.body.allowGravity = false;
         this.floatingFloor.setVelocityX(50);

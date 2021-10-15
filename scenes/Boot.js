@@ -1,9 +1,7 @@
 
 export default class Boot extends Phaser.Scene {
     constructor(){
-        super({
-            key: `boot`
-        })
+        super({key: `boot`})
     }
 
     preload(){
@@ -31,7 +29,6 @@ export default class Boot extends Phaser.Scene {
         const loadingString = `Loading...`;
         this.add.text(100, 100, loadingString, textStyle);
 
-        
     }
 
     update(){
