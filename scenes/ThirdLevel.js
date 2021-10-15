@@ -119,7 +119,7 @@
             this.physics.add.collider(this.princess, this.fire, this.hitMonster, null, this);
     
             //collision is going to level 2
-            this.physics.add.collider(this.princess, this.hitNextLevel, this.levelThree, null, this);
+            this.physics.add.collider(this.princess, this.hitNextLevel, this.youWin, null, this);
         }
     
         playerControls(){
@@ -205,8 +205,8 @@
             });
         }
     
-        levelThree(){
-            this.scene.start(`textLoadlvl2`);
+        youWin(){
+            this.scene.start(`youWin`);
         }
 
 
