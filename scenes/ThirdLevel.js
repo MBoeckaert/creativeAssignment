@@ -5,10 +5,10 @@
     //https://phaser.io/examples/v3/view/camera/set-bounds
 
     //make bg image wider than view
-    export default class SecondLevel extends Phaser.Scene {
+    export default class ThirdLevel extends Phaser.Scene {
         constructor(){
             super({
-                key: `level2`
+                key: `level3`
             });
         }
 
@@ -21,19 +21,19 @@
             this.princess.setScale(0.3);
             //monster
             this.monster = this.physics.add.sprite(750, 500, `monster`);
-
-            //create a hitzone BIG SPRITE
-            this.hitNextLevel = this.physics.add.sprite(780, 300, `test`);
-            this.hitNextLevel.setScale(0.3);
             
             //all the text
-            this.gameInfo = this.add.text(20, 20, `Level 2`, {fontSize: `16px`, fill: `#ffff`})
+            this.gameInfo = this.add.text(20, 20, `Level 3`, {fontSize: `16px`, fill: `#ffff`})
             this.gameOverText = this.add.text(400, 300, `Game Over`, {fontSize: `128px`, fill: `#ff0000`}).setInteractive({cursor: `pointer`});
             this.gameOverText.setOrigin(0.5);
             this.gameOverText.visible = false;
             this.playAgain = this.add.text(400, 350, `click to play again`, {fontSize: `32px`, fill: `#ffff`}).setInteractive({cursor: `pointer`});
             this.playAgain.setOrigin(0.5, 0);
             this.playAgain.visible = false;
+    
+            //create a hitzone BIG SPRITE
+            this.hitNextLevel = this.physics.add.sprite(750, 300, `test`);
+            this.hitNextLevel.setScale(0.3);
     
             this.creatingPlatforms();
             this.creatingMovablePlatforms();
@@ -99,6 +99,7 @@
             this.princess.setBounce(0.2);
             this.princess.setCollideWorldBounds(true);
             this.monster.setCollideWorldBounds(true);
+    
             this.hitNextLevel.setCollideWorldBounds(true);
         }
     
@@ -106,13 +107,13 @@
             //2. colliding interactions
             this.physics.add.collider(this.princess, this.platforms);
             this.physics.add.collider(this.princess, this.floatingFloor);
+            this.physics.add.collider(this.monster, this.platforms);
+
             this.physics.add.collider(this.princess, this.fixedFloatingFloor);
             this.physics.add.collider(this.princess, this.leftFixedFloatingFloor);
             this.physics.add.collider(this.princess, this.rightFixedFloatingFloor);
 
-            this.physics.add.collider(this.monster, this.platforms);
-
-            this.physics.add.collider(this.hitNextLevel, this.fixedFloatingFloor);
+            this.physics.add.collider(this.fixedFloatingFloor, this.hitNextLevel);
                 
             this.physics.add.collider(this.princess, this.monster, this.hitMonster, null, this);
             this.physics.add.collider(this.princess, this.fire, this.hitMonster, null, this);
@@ -205,7 +206,7 @@
         }
     
         levelThree(){
-            this.scene.start(`textLoadlvl3`);
+            this.scene.start(`textLoadlvl2`);
         }
 
 
