@@ -17,13 +17,13 @@
             this.bg = this.add.image(0,0, `bg`);
             Phaser.Display.Align.In.Center(this.bg, this.add.zone(400, 300, 800, 600));
             //princess
-            this.princess = this.physics.add.sprite(50, 750, `princess`);
+            this.princess = this.physics.add.sprite(735, 250, `princess`);
             this.princess.setScale(0.3);
             //monster
             this.monster = this.physics.add.sprite(750, 500, `monster`);
 
             //create a hitzone BIG SPRITE
-            this.hitNextLevel = this.physics.add.sprite(780, 300, `test`);
+            this.hitNextLevel = this.physics.add.sprite(100, 150, `test`);
             this.hitNextLevel.setScale(0.3);
             
             //all the text
@@ -38,6 +38,7 @@
             this.creatingPlatforms();
             this.creatingMovablePlatforms();
             this.fixedFloatingPlatform();
+            this.smallFloatingPlatform();
 
             this.creatingFire();
     
@@ -82,6 +83,20 @@
             this.fixedFloatingFloor = this.physics.add.staticGroup();
             this.fixedFloatingFloor.create(65,500, `floatingFloor`);
             this.fixedFloatingFloor.create(735,350, `floatingFloor`);
+            this.fixedFloatingFloor.create(535, 200, `floatingFloor`);
+            this.fixedFloatingFloor.create(471, 200, `floatingFloor`);
+
+            this.fixedFloatingFloor.create(200, 200, `floatingFloor`);
+            this.fixedFloatingFloor.create(136, 200, `floatingFloor`);
+        }
+
+        smallFloatingPlatform(){
+            this.smallFloat = this.physics.add.staticGroup();
+            // const amountOfFloat = 3;
+            // for(let i = 0; i < amountOfFloat; i++){
+            //     this.smallFloat.create(225 + (i*175), 275 - (i*25), `smallFloat`).setScale(0.2).refreshBody();
+            // }
+            this.smallFloat.create(735, 260, `smallFloat`).setScale(0.2).refreshBody();
         }
 
         creatingFire(){
@@ -109,16 +124,19 @@
             this.physics.add.collider(this.princess, this.fixedFloatingFloor);
             this.physics.add.collider(this.princess, this.leftFixedFloatingFloor);
             this.physics.add.collider(this.princess, this.rightFixedFloatingFloor);
+            this.physics.add.collider(this.princess, this.smallFloat);
 
             this.physics.add.collider(this.monster, this.platforms);
+            this.physics.add.collider(this.monster, this.fixedFloatingFloor);
 
+            this.physics.add.collider(this.hitNextLevel, this.platforms);
             this.physics.add.collider(this.hitNextLevel, this.fixedFloatingFloor);
                 
             this.physics.add.collider(this.princess, this.monster, this.hitMonster, null, this);
             this.physics.add.collider(this.princess, this.fire, this.hitMonster, null, this);
     
             //collision is going to level 2
-            this.physics.add.collider(this.princess, this.hitNextLevel, this.levelThree, null, this);
+            this.physics.add.collider(this.princess, this.hitNextLevel, this.youWin, null, this);
         }
     
         playerControls(){
