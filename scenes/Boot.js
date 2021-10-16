@@ -11,6 +11,7 @@ export default class Boot extends Phaser.Scene {
         this.load.image(`fire`, `assets/fire.png`);
         this.load.image(`floor`, `assets/groundFloor.png`);
         this.load.image(`floatingFloor`, `assets/floatingFloor.png`);
+        this.load.image(`smallFloat`, `assets/smallFloatingFloor.png`);
 
         this.load.image(`test`, `assets/characters-2.png`);
 

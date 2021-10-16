@@ -17,10 +17,11 @@
             this.bg = this.add.image(0,0, `bg`);
             Phaser.Display.Align.In.Center(this.bg, this.add.zone(400, 300, 800, 600));
             //princess
-            this.princess = this.physics.add.sprite(50, 750, `princess`);
+            this.princess = this.physics.add.sprite(575, 50, `princess`);
             this.princess.setScale(0.3);
+            this.princess.setBounce(0.2);
             //monster
-            this.monster = this.physics.add.sprite(750, 500, `monster`);
+            this.monster = this.physics.add.sprite(801, 125, `monster`);
             
             //all the text
             this.gameInfo = this.add.text(20, 20, `Level 3`, {fontSize: `16px`, fill: `#ffff`})
@@ -32,12 +33,13 @@
             this.playAgain.visible = false;
     
             //create a hitzone BIG SPRITE
-            this.hitNextLevel = this.physics.add.sprite(775, 525, `test`);
+            this.hitNextLevel = this.physics.add.sprite(425, 50, `test`);
             this.hitNextLevel.setScale(0.3);
     
             this.creatingPlatforms();
             this.creatingMovablePlatforms();
             this.fixedFloatingPlatform();
+            this.smallFloatingPlatform();
 
             this.creatingFire();
     
@@ -69,7 +71,7 @@
             this.leftFixedFloatingFloor.setVelocityX(50);
 
             //Right movable platform
-            this.rightFixedFloatingFloor = this.physics.add.image(500,425, `floatingFloor`);
+            this.rightFixedFloatingFloor = this.physics.add.image(500,500, `floatingFloor`);
             this.rightFixedFloatingFloor.setImmovable(true);
             this.rightFixedFloatingFloor.body.allowGravity = false;
             this.rightFixedFloatingFloor.setVelocityX(50);
@@ -79,7 +81,18 @@
             //floating fixed platforms
             this.fixedFloatingFloor = this.physics.add.staticGroup();
             this.fixedFloatingFloor.create(65,500, `floatingFloor`);
-            // this.fixedFloatingFloor.create(735,350, `floatingFloor`);
+            this.fixedFloatingFloor.create(65,350, `floatingFloor`);
+            this.fixedFloatingFloor.create(735,175, `floatingFloor`);
+            this.fixedFloatingFloor.create(425,100, `floatingFloor`);
+        }
+
+        smallFloatingPlatform(){
+            this.smallFloat = this.physics.add.staticGroup();
+            const amountOfFloat = 3;
+            for(let i = 0; i < amountOfFloat; i++){
+                this.smallFloat.create(225 + (i*175), 275 - (i*25), `smallFloat`).setScale(0.2).refreshBody();
+            }
+            this.smallFloat.create(575,125, `smallFloat`).setScale(0.2).refreshBody();
         }
 
         creatingFire(){
@@ -94,7 +107,6 @@
         gamePhysics(){
             //3. physics methods
             // this.princess.setVelocity(100,200);
-            this.princess.setBounce(0.2);
             this.princess.setCollideWorldBounds(true);
             this.monster.setCollideWorldBounds(true);
     
@@ -105,13 +117,16 @@
             //2. colliding interactions
             this.physics.add.collider(this.princess, this.platforms);
             this.physics.add.collider(this.princess, this.floatingFloor);
-            this.physics.add.collider(this.monster, this.platforms);
-
             this.physics.add.collider(this.princess, this.fixedFloatingFloor);
             this.physics.add.collider(this.princess, this.leftFixedFloatingFloor);
             this.physics.add.collider(this.princess, this.rightFixedFloatingFloor);
+            this.physics.add.collider(this.princess, this.smallFloat);
 
-            this.physics.add.collider(this.platforms, this.hitNextLevel);
+            this.physics.add.collider(this.monster, this.platforms);
+            this.physics.add.collider(this.monster, this.fixedFloatingFloor);
+
+            this.physics.add.collider(this.hitNextLevel, this.platforms);
+            this.physics.add.collider(this.hitNextLevel, this.fixedFloatingFloor);
                 
             this.physics.add.collider(this.princess, this.monster, this.hitMonster, null, this);
             this.physics.add.collider(this.princess, this.fire, this.hitMonster, null, this);
@@ -179,11 +194,11 @@
         monsterMovement(){
             //Create Moving Monster
             // this.monster.setVelocityX(50);
-            if (this.monster.x >= 750)
+            if (this.monster.x >= 780)
             {
                 this.monster.setVelocityX(-75);
             }
-            else if (this.monster.x <= 500)
+            else if (this.monster.x <= 670)
             {
                 this.monster.setVelocityX(75);
             }
