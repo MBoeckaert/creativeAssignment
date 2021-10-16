@@ -28,7 +28,8 @@ export default class FirstLevel extends Phaser.Scene {
         this.playAgain.visible = false;
 
         //create a hitzone BIG SPRITE
-        this.hitNextLevel = this.physics.add.sprite(750, 550, `test`);
+        this.hitNextLevel = this.physics.add.sprite(750, 525, `test`);
+        this.hitNextLevel.setScale(0.3);
 
         this.creatingPlatforms();
         this.creatingMovablePlatforms();
@@ -82,16 +83,25 @@ export default class FirstLevel extends Phaser.Scene {
     }
 
     collidingInteractions(){
-        //2. colliding interactions
-        this.physics.add.collider(this.princess, this.platforms);
-        this.physics.add.collider(this.princess, this.floatingFloor);
-        this.physics.add.collider(this.monster, this.platforms);
-            
-        this.physics.add.collider(this.princess, this.monster, this.hitMonster, null, this);
-        this.physics.add.collider(this.princess, this.fire, this.hitMonster, null, this);
+            //2. colliding interactions
+            this.physics.add.collider(this.princess, this.platforms);
+            this.physics.add.collider(this.princess, this.floatingFloor);
+            this.physics.add.collider(this.princess, this.fixedFloatingFloor);
+            this.physics.add.collider(this.princess, this.leftFixedFloatingFloor);
+            this.physics.add.collider(this.princess, this.rightFixedFloatingFloor);
+            this.physics.add.collider(this.princess, this.smallFloat);
 
-        //collision is going to level 2
-        this.physics.add.collider(this.princess, this.hitNextLevel, this.levelTwo, null, this);
+            this.physics.add.collider(this.monster, this.platforms);
+            this.physics.add.collider(this.monster, this.fixedFloatingFloor);
+
+            this.physics.add.collider(this.hitNextLevel, this.platforms);
+            this.physics.add.collider(this.hitNextLevel, this.fixedFloatingFloor);
+                
+            this.physics.add.collider(this.princess, this.monster, this.hitMonster, null, this);
+            this.physics.add.collider(this.princess, this.fire, this.hitMonster, null, this);
+    
+            //collision is going to level 2
+            this.physics.add.collider(this.princess, this.hitNextLevel, this.youWin, null, this);
     }
 
     playerControls(){

@@ -8,7 +8,7 @@ export default class LoadingScreen extends Phaser.Scene {
     create(){
         //click to start game
         this.input.on(`pointerdown`, () => {
-            this.scene.start(`level2`);
+            this.scene.start(`level1`);
         });
 
         //text

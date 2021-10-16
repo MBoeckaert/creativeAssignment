@@ -17,7 +17,7 @@
             this.bg = this.add.image(0,0, `bg`);
             Phaser.Display.Align.In.Center(this.bg, this.add.zone(400, 300, 800, 600));
             //princess
-            this.princess = this.physics.add.sprite(735, 250, `princess`);
+            this.princess = this.physics.add.sprite(50, 750, `princess`);
             this.princess.setScale(0.3);
             //monster
             this.monster = this.physics.add.sprite(750, 500, `monster`);
