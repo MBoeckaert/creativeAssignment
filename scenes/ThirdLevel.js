@@ -83,7 +83,7 @@
             this.fixedFloatingFloor.create(65,500, `floatingFloor`);
             this.fixedFloatingFloor.create(65,350, `floatingFloor`);
             this.fixedFloatingFloor.create(735,175, `floatingFloor`);
-            this.fixedFloatingFloor.create(425,100, `floatingFloor`);
+            this.fixedFloatingFloor.create(425,80, `floatingFloor`);
         }
 
         smallFloatingPlatform(){
