@@ -32,7 +32,7 @@
             this.playAgain.visible = false;
     
             //create a hitzone BIG SPRITE
-            this.hitNextLevel = this.physics.add.sprite(750, 300, `test`);
+            this.hitNextLevel = this.physics.add.sprite(775, 525, `test`);
             this.hitNextLevel.setScale(0.3);
     
             this.creatingPlatforms();
@@ -58,9 +58,7 @@
             //set floor platforms
             this.platforms = this.physics.add.staticGroup();
             this.platforms.create(128, 590, 'floor').setScale(2).refreshBody(); //refreshBody() doesn't work
-            this.platforms.create(192, 590, `floor`).setScale(2).refreshBody();
-            this.platforms.create(610, 590, `floor`).setScale(2).refreshBody();
-            this.platforms.create(800, 590, `floor`).setScale(2).refreshBody();
+            this.platforms.create(865, 590, 'floor').setScale(2).refreshBody();
         }
         
         creatingMovablePlatforms(){
@@ -81,16 +79,16 @@
             //floating fixed platforms
             this.fixedFloatingFloor = this.physics.add.staticGroup();
             this.fixedFloatingFloor.create(65,500, `floatingFloor`);
-            this.fixedFloatingFloor.create(735,350, `floatingFloor`);
+            // this.fixedFloatingFloor.create(735,350, `floatingFloor`);
         }
 
         creatingFire(){
-            //fire
+            //fires
             this.fire = this.physics.add.staticGroup();
-            this.fire.create(340, 590, `fire`).refreshBody();
-            this.fire.create(380, 590, `fire`).refreshBody();
-            this.fire.create(420, 590, `fire`).refreshBody();
-            this.fire.create(460, 590, `fire`).refreshBody();
+            const amountOfFire = 12;
+            for(let i =0; i < amountOfFire; i++){
+                this.fire.create(275 + (i*40), 590, `fire`).refreshBody();
+            }
         }
     
         gamePhysics(){
@@ -113,7 +111,7 @@
             this.physics.add.collider(this.princess, this.leftFixedFloatingFloor);
             this.physics.add.collider(this.princess, this.rightFixedFloatingFloor);
 
-            this.physics.add.collider(this.fixedFloatingFloor, this.hitNextLevel);
+            this.physics.add.collider(this.platforms, this.hitNextLevel);
                 
             this.physics.add.collider(this.princess, this.monster, this.hitMonster, null, this);
             this.physics.add.collider(this.princess, this.fire, this.hitMonster, null, this);
