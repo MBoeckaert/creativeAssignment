@@ -6,9 +6,6 @@ export default class FirstLevel extends Phaser.Scene {
         this.gameOver = false;
     }
 
-    //add sound
-    //https://www.epidemicsound.com/music/genres/video-games/
-
     create(){
         //background
         this.bg = this.add.image(0,0, `bg`);
