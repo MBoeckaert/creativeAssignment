@@ -6,8 +6,6 @@ export default class FirstLevel extends Phaser.Scene {
         this.gameOver = false;
     }
 
-    //main test
-
     create(){
         //background
         this.bg = this.add.image(0,0, `bg`);
