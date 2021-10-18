@@ -24,7 +24,8 @@
             this.monster = this.physics.add.sprite(801, 125, `monster`);
             
             //all the text
-            this.gameInfo = this.add.text(20, 20, `Level 3`, {fontSize: `16px`, fill: `#ffff`})
+            this.levelInfo = this.add.text(20, 20, `Level 3`, {fontSize: `16px`, fill: `#ffff`});
+            this.saveMe = this.add.text(450, 20, `Help me Cassy, I'm stuck`, {fontSize: `16px`, fill: `#ffff`})
             this.gameOverText = this.add.text(400, 300, `Game Over`, {fontSize: `128px`, fill: `#ff0000`}).setInteractive({cursor: `pointer`});
             this.gameOverText.setOrigin(0.5);
             this.gameOverText.visible = false;
@@ -33,8 +34,8 @@
             this.playAgain.visible = false;
     
             //create a hitzone BIG SPRITE
-            this.hitNextLevel = this.physics.add.sprite(425, 50, `test`);
-            this.hitNextLevel.setScale(0.3);
+            this.hitNextLevel = this.physics.add.sprite(425, 50, `male`);
+            this.hitNextLevel.setScale(0.06);
     
             this.creatingPlatforms();
             this.creatingMovablePlatforms();

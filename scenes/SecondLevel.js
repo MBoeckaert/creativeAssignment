@@ -23,11 +23,11 @@
             this.monster = this.physics.add.sprite(750, 500, `monster`);
 
             //create a hitzone BIG SPRITE
-            this.hitNextLevel = this.physics.add.sprite(100, 150, `test`);
-            this.hitNextLevel.setScale(0.3);
+            this.hitNextLevel = this.physics.add.sprite(100, 135, `portal`);
+            this.hitNextLevel.setScale(0.03);
             
             //all the text
-            this.gameInfo = this.add.text(20, 20, `Level 2`, {fontSize: `16px`, fill: `#ffff`})
+            this.levelInfo = this.add.text(20, 20, `Level 2`, {fontSize: `16px`, fill: `#ffff`})
             this.gameOverText = this.add.text(400, 300, `Game Over`, {fontSize: `128px`, fill: `#ff0000`}).setInteractive({cursor: `pointer`});
             this.gameOverText.setOrigin(0.5);
             this.gameOverText.visible = false;

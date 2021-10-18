@@ -13,12 +13,15 @@ export default class FirstLevel extends Phaser.Scene {
         this.bg = this.add.image(0,0, `bg`);
         Phaser.Display.Align.In.Center(this.bg, this.add.zone(400, 300, 800, 600));
         //princess
-        this.princess = this.physics.add.sprite(50, 750, `princess`);
-        this.princess.setScale(0.3);
+        this.princess = this.physics.add.sprite(50, 750, `princess`).setScale(0.3).refreshBody();
         //monster
         this.monster = this.physics.add.sprite(680, 500, `monster`);
         //all the text
-        this.gameInfo = this.add.text(20, 20, `Level 1`, {fontSize: `16px`, fill: `#ffff`})
+        this.levelInfo = this.add.text(20, 20, `Level 1`, {fontSize: `16px`, fill: `#ffff`});
+        this.gameInfoH1 = this.add.text(400, 300, `Save Mark!`, {fontSize: `32px`, fill: `#ffff`})
+        this.gameInfoH1.setOrigin(0.5);
+        this.gameInfoH2 = this.add.text(400, 350, `Go through the portals and find him!`, {fontSize: `32px`, fill: `#ffff`})
+        this.gameInfoH2.setOrigin(0.5);
         this.gameOverText = this.add.text(400, 300, `Game Over`, {fontSize: `128px`, fill: `#ff0000`}).setInteractive({cursor: `pointer`});
         this.gameOverText.setOrigin(0.5);
         this.gameOverText.visible = false;
@@ -27,8 +30,8 @@ export default class FirstLevel extends Phaser.Scene {
         this.playAgain.visible = false;
 
         //create a hitzone BIG SPRITE
-        this.hitNextLevel = this.physics.add.sprite(750, 525, `test`);
-        this.hitNextLevel.setScale(0.3);
+        this.hitNextLevel = this.physics.add.sprite(775, 540, `portal`);
+        this.hitNextLevel.setScale(0.03);
 
         this.creatingPlatforms();
         this.creatingMovablePlatforms();
@@ -37,6 +40,7 @@ export default class FirstLevel extends Phaser.Scene {
         this.gamePhysics();
         this.collidingInteractions();
         this.playerControls();
+        // this.playerAnimations();
 
     }
 
@@ -116,6 +120,21 @@ export default class FirstLevel extends Phaser.Scene {
         this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     }
 
+    monsterAnimations(){
+        this.anims.create({
+            key: `left`,
+            frames: this.anims.generateFrameNumbers('monster', { start: 2, end: 3 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'right',
+            frames: this.anims.generateFrameNumbers('princess', { start: 0, end: 1 }),
+            frameRate: 10,
+            repeat: -1
+        });
+    }
+
     playerMovement(){
         //create Player Movement
         if (this.cursors.left.isDown || this.keyA.isDown)
@@ -168,6 +187,8 @@ export default class FirstLevel extends Phaser.Scene {
         this.gameOver = true;
         this.gameOverText.visible = true;
         this.playAgain.visible = true;
+        this.gameInfoH1.visible = false;
+        this.gameInfoH2.visible = false;
 
         this.input.on(`pointerdown`, () => {
             this.scene.start(`loadingscreen`);

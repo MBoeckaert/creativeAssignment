@@ -7,7 +7,7 @@ export default class WinnerScreen extends Phaser.Scene {
 
     create(){
         //text
-        this.startClick = this.add.text(400, 300, `You Win`, {fontSize: `64px`, fill: `#ffff`}).setInteractive({cursor: `pointer`});
+        this.startClick = this.add.text(400, 300, `You Saved Mark!`, {fontSize: `64px`, fill: `#ffff`}).setInteractive({cursor: `pointer`});
         this.startClick.setOrigin(0.5);
 
         this.startClick = this.add.text(400, 350, `Play Again?`, {fontSize: `28px`, fill: `#ffff`}).setInteractive({cursor: `pointer`});
