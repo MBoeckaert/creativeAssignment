@@ -27,6 +27,7 @@ export default class Boot extends Phaser.Scene {
             // this.scene.start(`play`);
             this.scene.start(`loadingscreen`);
         });
+
     }
 
     create(){
@@ -41,10 +42,20 @@ export default class Boot extends Phaser.Scene {
         const music = this.sound.add(`theme`);
         music.loop = true;
         music.play();
+
+        this.creatingPlatforms();
     }
 
     update(){
 
+    }
+
+    creatingPlatforms(){
+        //set floor platforms
+        this.platforms = this.physics.add.staticGroup();
+        this.platforms.create(128, 590, 'floor').setScale(2).refreshBody(); //refreshBody() doesn't work
+        this.platforms.create(544, 590, `floor`).setScale(2).refreshBody();
+        this.platforms.create(800, 590, `floor`).setScale(2).refreshBody();
     }
 
 }

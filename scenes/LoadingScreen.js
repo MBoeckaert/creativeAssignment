@@ -8,11 +8,11 @@ export default class LoadingScreen extends Phaser.Scene {
     create(){
         //click to start game
         this.input.on(`pointerdown`, () => {
-            this.scene.start(`level3`);
+            this.scene.start(`level1`);
         });
 
         //text
         this.startClick = this.add.text(400, 300, `Start Game`, {fontSize: `64px`, fill: `#ffff`}).setInteractive({cursor: `pointer`});
         this.startClick.setOrigin(0.5);
     }
-}
+} 

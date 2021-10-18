@@ -8,6 +8,7 @@ import SecondLevel from "./scenes/SecondLevel.js";
 import LoadingLevelThree from "./scenes/LoadingLevelThree.js";
 import ThirdLevel from "./scenes/ThirdLevel.js";
 import WinnerScreen from "./scenes/WinnerScreen.js";
+import FourthLevel from "./scenes/FourthLevel.js";
 
 const config = {
     type: Phaser.AUTO,
@@ -20,7 +21,7 @@ const config = {
             gravity: {y:300}
         }
     },
-    scene: [Boot, LoadingScreen, FirstLevel, LoadingLevelTwo, SecondLevel, LoadingLevelThree, ThirdLevel, WinnerScreen]
+    scene: [Boot, LoadingScreen, FirstLevel, LoadingLevelTwo, SecondLevel, LoadingLevelThree, ThirdLevel, WinnerScreen, FourthLevel]
 }
 
 let game = new Phaser.Game(config);
