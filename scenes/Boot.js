@@ -59,3 +59,6 @@ export default class Boot extends Phaser.Scene {
     }
 
 }
+//create class extends Entity
+//new entity in other scenes
+//learn.yorkcs.com space invaders
