@@ -1,4 +1,7 @@
-export default class ThirdLevel extends Phaser.Scene {
+import {addBg, levelText} from "../functions/lib.js";
+import MainCharacter from "./classes/MainCharacter.js";
+
+export default class FourthLevel extends Phaser.Scene {
     constructor(){
         super({
             key: `level4`
@@ -6,7 +9,13 @@ export default class ThirdLevel extends Phaser.Scene {
     }
 
     create(){
-        this.bg = this.add.image(0,0, `bg`);
-        this.creatingPlatforms();
+        addBg(this);
+        // addPrincess(this);
+        levelText(this, 4);
+        // platform(this, 128, 590);
+        // mainChar(this, 200, 500);
+        let princess = new MainCharacter({scene:this,x:100,y:100/2});
+        // princess.setScale(0.5);
     }
 }
+

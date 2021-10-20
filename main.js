@@ -9,6 +9,7 @@ import LoadingLevelThree from "./scenes/LoadingLevelThree.js";
 import ThirdLevel from "./scenes/ThirdLevel.js";
 import WinnerScreen from "./scenes/WinnerScreen.js";
 import FourthLevel from "./scenes/FourthLevel.js";
+// import Platform from "./classes/Platform.js";
 
 const config = {
     type: Phaser.AUTO,

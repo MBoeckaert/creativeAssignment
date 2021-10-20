@@ -1,3 +1,5 @@
+
+
 export default class FirstLevel extends Phaser.Scene {
     constructor(){
         super({
@@ -41,6 +43,7 @@ export default class FirstLevel extends Phaser.Scene {
         this.collidingInteractions();
         this.playerControls();
         // this.playerAnimations();
+
 
     }
 

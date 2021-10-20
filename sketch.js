@@ -72,8 +72,11 @@ function drawKeypoints()  {
 //webcam is mirror imaged
 function checkLeftHigherThanRight() {
   if(wristLy > wristRy){
-    console.log(`right is higher`);
+    console.log(`moving right`);
   }else{
-    console.log(`left is higher`);
+    console.log(`moving left`);
   }
 }
+
+//need jump function
+// if nose.X is moving upwards log nose upwards

@@ -5,6 +5,9 @@
     //https://phaser.io/examples/v3/view/camera/set-bounds
 
     //make bg image wider than view
+
+import {levelText} from "../functions/lib.js";
+
     export default class ThirdLevel extends Phaser.Scene {
         constructor(){
             super({
@@ -24,7 +27,7 @@
             this.monster = this.physics.add.sprite(801, 125, `monster`);
             
             //all the text
-            this.levelInfo = this.add.text(20, 20, `Level 3`, {fontSize: `16px`, fill: `#ffff`});
+            levelText(this, 3);
             this.saveMe = this.add.text(450, 20, `Help me Cassy, I'm stuck`, {fontSize: `16px`, fill: `#ffff`})
             this.gameOverText = this.add.text(400, 300, `Game Over`, {fontSize: `128px`, fill: `#ff0000`}).setInteractive({cursor: `pointer`});
             this.gameOverText.setOrigin(0.5);
