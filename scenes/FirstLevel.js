@@ -1,50 +1,42 @@
-
+import { addBg, levelText } from "../functions/lib.js";
+import MainCharacter from "../classes/MainCharacter.js";
+import Monster from "../classes/Monster.js";
+import PlatformGroup from "../classes/PlatformGroup.js";
+import FireGroup from "../classes/Fire.js";
 
 export default class FirstLevel extends Phaser.Scene {
     constructor() {
         super({
             key: `level1`
-        }),
-            this.gameOver = false;
+        })
     }
 
-    //main 
-
     create() {
-        //background
-        this.bg = this.add.image(0, 0, `bg`);
-        Phaser.Display.Align.In.Center(this.bg, this.add.zone(400, 300, 800, 600));
-        //princess
-        this.princess = this.physics.add.sprite(50, 750, `princess`).setScale(0.3).refreshBody();
-        //monster
-        this.monster = this.physics.add.sprite(680, 500, `monster`);
+        //load assets
+        addBg(this);
+        this.princess = new MainCharacter({ scene: this, x: 50, y: 525 });
+        this.monster = new Monster({ scene: this, x: 680, y: 525 });
+        this.platformGroup = new PlatformGroup(this);
+        this.fire = new FireGroup(this);
         //all the text
-        this.levelInfo = this.add.text(20, 20, `Level 1`, { fontSize: `16px`, fill: `#ffff` });
-        this.gameInfoH1 = this.add.text(400, 300, `Save Mark!`, { fontSize: `32px`, fill: `#ffff` })
-        this.gameInfoH1.setOrigin(0.5);
-        this.gameInfoH2 = this.add.text(400, 350, `Go through the portals and find him!`, { fontSize: `32px`, fill: `#ffff` })
-        this.gameInfoH2.setOrigin(0.5);
-        this.gameOverText = this.add.text(400, 300, `Game Over`, { fontSize: `128px`, fill: `#ff0000` }).setInteractive({ cursor: `pointer` });
-        this.gameOverText.setOrigin(0.5);
+        levelText(this, 1);
+        this.gameText1 = this.add.text(400, 200, `Save Mark!`, { fontSize: `32px`, fill: `#ffff` }).setOrigin(0.5);
+        this.gameText2 = this.add.text(400, 250, `Go through the portals and find him!`, { fontSize: `32px`, fill: `#ffff` }).setOrigin(0.5);
+        this.gameText3 = this.add.text(400, 300, `Use arrowkeys to move & jump`, { fontSize: `32px`, fill: `#ffff` }).setOrigin(0.5);
+        this.gameOverText = this.add.text(400, 300, `Game Over`, { fontSize: `128px`, fill: `#ff0000` }).setInteractive({ cursor: `pointer` }).setOrigin(0.5);
         this.gameOverText.visible = false;
-        this.playAgain = this.add.text(400, 350, `click to play again`, { fontSize: `32px`, fill: `#ffff` }).setInteractive({ cursor: `pointer` });
-        this.playAgain.setOrigin(0.5, 0);
+        this.playAgain = this.add.text(400, 350, `click to play again`, { fontSize: `32px`, fill: `#ffff` }).setInteractive({ cursor: `pointer` }).setOrigin(0.5);;
         this.playAgain.visible = false;
 
         //create a hitzone BIG SPRITE
         this.hitNextLevel = this.physics.add.sprite(775, 540, `portal`);
         this.hitNextLevel.setScale(0.03);
 
-        this.creatingPlatforms();
         this.creatingMovablePlatforms();
-        this.creatingFire();
 
-        this.gamePhysics();
         this.collidingInteractions();
         this.playerControls();
         // this.playerAnimations();
-
-
     }
 
     update() {
@@ -52,15 +44,7 @@ export default class FirstLevel extends Phaser.Scene {
         this.floatingPlatformMovement();
         this.monsterMovement();
     }
-
-    creatingPlatforms() {
-        //set floor platforms
-        this.platforms = this.physics.add.staticGroup();
-        this.platforms.create(128, 590, 'floor').setScale(2).refreshBody(); //refreshBody() doesn't work
-        this.platforms.create(544, 590, `floor`).setScale(2).refreshBody();
-        this.platforms.create(800, 590, `floor`).setScale(2).refreshBody();
-    }
-
+    //all extra functions
     creatingMovablePlatforms() {
         //Make a movable platform
         this.floatingFloor = this.physics.add.image(250, 500, `floatingFloor`);
@@ -69,43 +53,14 @@ export default class FirstLevel extends Phaser.Scene {
         this.floatingFloor.setVelocityX(50);
     }
 
-    creatingFire() {
-        //fire
-        this.fire = this.physics.add.staticGroup();
-        this.fire.create(276, 590, `fire`).refreshBody();
-        this.fire.create(316, 590, `fire`).refreshBody();
-        this.fire.create(356, 590, `fire`).refreshBody();
-        this.fire.create(396, 590, `fire`).refreshBody();
-    }
-
-    gamePhysics() {
-        //3. physics methods
-        // this.princess.setVelocity(100,200);
-        this.princess.setBounce(0.2);
-        this.princess.setCollideWorldBounds(true);
-        this.monster.setCollideWorldBounds(true);
-
-        this.hitNextLevel.setCollideWorldBounds(true);
-    }
-
     collidingInteractions() {
-        //2. colliding interactions
-        this.physics.add.collider(this.princess, this.platforms);
+        this.physics.add.collider(this.princess, this.platformGroup);
         this.physics.add.collider(this.princess, this.floatingFloor);
-        this.physics.add.collider(this.princess, this.fixedFloatingFloor);
-        this.physics.add.collider(this.princess, this.leftFixedFloatingFloor);
-        this.physics.add.collider(this.princess, this.rightFixedFloatingFloor);
-        this.physics.add.collider(this.princess, this.smallFloat);
-
-        this.physics.add.collider(this.monster, this.platforms);
-        this.physics.add.collider(this.monster, this.fixedFloatingFloor);
-
-        this.physics.add.collider(this.hitNextLevel, this.platforms);
-        this.physics.add.collider(this.hitNextLevel, this.fixedFloatingFloor);
-
-        this.physics.add.collider(this.princess, this.monster, this.hitMonster, null, this);
-        this.physics.add.collider(this.princess, this.fire, this.hitMonster, null, this);
-
+        this.physics.add.collider(this.monster, this.platformGroup);
+        this.physics.add.collider(this.hitNextLevel, this.platformGroup);
+        //hit enemies or fire
+        this.physics.add.collider(this.princess, this.monster, this.hitMonsterOrFire, null, this);
+        this.physics.add.collider(this.princess, this.fire, this.hitMonsterOrFire, null, this);
         //collision is going to level 2
         this.physics.add.collider(this.princess, this.hitNextLevel, this.levelTwo, null, this);
     }
@@ -113,13 +68,10 @@ export default class FirstLevel extends Phaser.Scene {
     playerControls() {
         //4. get keyboard input
         this.cursors = this.input.keyboard.createCursorKeys();
-        //key Left
+        //key Left, right, up, down
         this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-        //key Right
         this.keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
-        //key Up
         this.keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
-        //key Down
         this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     }
 
@@ -165,8 +117,6 @@ export default class FirstLevel extends Phaser.Scene {
     }
 
     monsterMovement() {
-        //Create Moving Monster
-        // this.monster.setVelocityX(50);
         if (this.monster.x >= 650) {
             this.monster.setVelocityX(-75);
         }
@@ -175,16 +125,14 @@ export default class FirstLevel extends Phaser.Scene {
         }
     }
 
-    //Pause game when hit
-    //Restart
-    hitMonster(player, bomb) {
+    hitMonsterOrFire(player) {
         this.physics.pause();
         player.setTint(0xff0000);
-        this.gameOver = true;
         this.gameOverText.visible = true;
         this.playAgain.visible = true;
-        this.gameInfoH1.visible = false;
-        this.gameInfoH2.visible = false;
+        this.gameText1.visible = false;
+        this.gameText2.visible = false;
+        this.gameText3.visible = false;
 
         this.input.on(`pointerdown`, () => {
             this.scene.start(`loadingscreen`);
@@ -194,5 +142,4 @@ export default class FirstLevel extends Phaser.Scene {
     levelTwo() {
         this.scene.start(`textLoadlvl2`);
     }
-
 }

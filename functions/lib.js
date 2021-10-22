@@ -7,7 +7,8 @@ export const levelText = (text, level) => {
 }
 
 export const gameText = (text, xPos, yPos, message) => {
-  text.add.text(xPos, yPos, `${message}`, { fontSize: `32px`, fill: `#ffff` }).setOrigin(0.5);
+  let gameText = text.add.text(xPos, yPos, `${message}`, { fontSize: `32px`, fill: `#ffff` }).setOrigin(0.5);
+  return gameText;
 }
 
 export const platform = (platform, xPos, yPos) => {
