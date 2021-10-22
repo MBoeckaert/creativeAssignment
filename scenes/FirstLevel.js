@@ -14,7 +14,7 @@ export default class FirstLevel extends Phaser.Scene {
     create() {
         //load assets
         addBg(this);
-        this.princess = new MainCharacter({ scene: this, x: 50, y: 525 });
+        this.princess = new MainCharacter({ scene: this, x: 50, y: 425 });
         this.monster = new Monster({ scene: this, x: 680, y: 525 });
         this.platformGroup = new PlatformGroup(this);
         this.fire = new FireGroup(this);
@@ -37,6 +37,14 @@ export default class FirstLevel extends Phaser.Scene {
         this.collidingInteractions();
         this.playerControls();
         // this.playerAnimations();
+
+        // this.soundButton = this.game.add.button(this.game.world.centerX + 240, this.game.world.centerY - 290, 'sprites', this.toggleMute, this, 'sound-icon', 'sound-icon', 'sound-icon');
+        // this.soundButton.fixedToCamera = true;
+        // if (!this.game.sound.mute) {
+        //     this.soundButton.tint = 16777215;
+        // } else {
+        //     this.soundButton.tint = 16711680;
+        // }
     }
 
     update() {
@@ -75,17 +83,17 @@ export default class FirstLevel extends Phaser.Scene {
         this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     }
 
-    monsterAnimations() {
+    playerAnimations() {
         this.anims.create({
             key: `left`,
-            frames: this.anims.generateFrameNumbers('monster', { start: 2, end: 3 }),
-            frameRate: 10,
+            frames: this.anims.generateFrameNumbers(`princess`, { frames: [2, 3] }),
+            frameRate: 5,
             repeat: -1
         });
         this.anims.create({
             key: 'right',
-            frames: this.anims.generateFrameNumbers('princess', { start: 0, end: 1 }),
-            frameRate: 10,
+            frames: this.anims.generateFrameNumbers('princess', { frames: [0, 1] }),
+            frameRate: 5,
             repeat: -1
         });
     }
@@ -94,11 +102,14 @@ export default class FirstLevel extends Phaser.Scene {
         //create Player Movement
         if (this.cursors.left.isDown || this.keyA.isDown) {
             this.princess.setVelocityX(-100);
+            this.princess.flipX = true;
         }
         else if (this.cursors.right.isDown || this.keyE.isDown) {
             this.princess.setVelocityX(100);
+            this.princess.flipX = false;
         } else {
             this.princess.setVelocityX(0);
+
         }
 
         if ((this.cursors.up.isDown && this.princess.body.touching.down) || (this.keyZ.isDown && this.princess.body.touching.down)) {
@@ -119,9 +130,11 @@ export default class FirstLevel extends Phaser.Scene {
     monsterMovement() {
         if (this.monster.x >= 650) {
             this.monster.setVelocityX(-75);
+            this.monster.flipX = false;
         }
         else if (this.monster.x <= 425) {
             this.monster.setVelocityX(75);
+            this.monster.flipX = true;
         }
     }
 

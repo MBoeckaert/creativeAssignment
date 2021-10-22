@@ -116,9 +116,11 @@ export default class ThirdLevel extends Phaser.Scene {
         //create Player Movement
         if (this.cursors.left.isDown || this.keyA.isDown) {
             this.princess.setVelocityX(-100);
+            this.princess.flipX = true;
         }
         else if (this.cursors.right.isDown || this.keyE.isDown) {
             this.princess.setVelocityX(100);
+            this.princess.flipX = false;
         } else {
             this.princess.setVelocityX(0);
         }
@@ -151,9 +153,11 @@ export default class ThirdLevel extends Phaser.Scene {
     monsterMovement() {
         if (this.monster.x >= 780) {
             this.monster.setVelocityX(-75);
+            this.monster.flipX = false;
         }
         else if (this.monster.x <= 670) {
             this.monster.setVelocityX(75);
+            this.monster.flipX = true;
         }
     }
 

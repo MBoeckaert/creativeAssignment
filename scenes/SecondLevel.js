@@ -84,7 +84,7 @@ export default class SecondLevel extends Phaser.Scene {
         this.physics.add.collider(this.princess, this.leftFixedFloatingFloor);
         this.physics.add.collider(this.princess, this.rightFixedFloatingFloor);
         this.physics.add.collider(this.princess, this.smallFloat);
-        // mosnter interactions
+        // monster interactions
         this.physics.add.collider(this.monster, this.platformGroup);
         this.physics.add.collider(this.monster, this.fixedFloatingFloor);
         // nextLevel interactions
@@ -93,7 +93,7 @@ export default class SecondLevel extends Phaser.Scene {
         // enemies interactions
         this.physics.add.collider(this.princess, this.monster, this.hitMonsterOrFire, null, this);
         this.physics.add.collider(this.princess, this.fire, this.hitMonsterOrFire, null, this);
-        //collision is going to level 2
+        // nextLevel interactions
         this.physics.add.collider(this.princess, this.hitNextLevel, this.levelThree, null, this);
     }
 
@@ -111,9 +111,11 @@ export default class SecondLevel extends Phaser.Scene {
         //create Player Movement
         if (this.cursors.left.isDown || this.keyA.isDown) {
             this.princess.setVelocityX(-100);
+            this.princess.flipX = true;
         }
         else if (this.cursors.right.isDown || this.keyE.isDown) {
             this.princess.setVelocityX(100);
+            this.princess.flipX = false;
         } else {
             this.princess.setVelocityX(0);
         }
@@ -146,9 +148,11 @@ export default class SecondLevel extends Phaser.Scene {
     monsterMovement() {
         if (this.monster.x >= 750) {
             this.monster.setVelocityX(-75);
+            this.monster.flipX = false;
         }
         else if (this.monster.x <= 500) {
             this.monster.setVelocityX(75);
+            this.monster.flipX = true;
         }
     }
 
