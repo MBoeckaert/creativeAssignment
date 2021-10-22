@@ -1,19 +1,30 @@
 export const addBg = (bg) => {
-  bg.add.image(400,300, `bg`).setScale(1).setOrigin(0.5); 
+  bg.add.image(400, 300, `bg`).setScale(1).setOrigin(0.5);
 }
 
-export const levelText = (text, level) =>{
-  text.add.text(20, 20, `level ${level}`, {fontSize: `16px`, fill: `#ffff`})
+export const levelText = (text, level) => {
+  text.add.text(20, 20, `level ${level}`, { fontSize: `16px`, fill: `#ffff` })
+}
+
+export const gameText = (text, xPos, yPos, message) => {
+  text.add.text(xPos, yPos, `${message}`, { fontSize: `32px`, fill: `#ffff` }).setOrigin(0.5);
 }
 
 export const platform = (platform, xPos, yPos) => {
   const ground = platform.physics.add.staticGroup();
-  ground.create(xPos, yPos, `floor`);
+  ground.create(xPos, yPos, `floor`).setScale(2).refreshBody();
 }
 
-// export const mainChar = (mainChar, xPos, yPos) => {
-//   const princess = mainChar.physics.add.sprite(xPos, yPos, `princess`);
-//   princess.setScale(0.3);
-//   princess.setBounce(0.2);
-//   princess.setCollideWorldBounds(true);
+export const collidingInteractions = (collideInteractions, firstAssets, secondAsset) => {
+  const collide = collideInteractions.physics.add.collider(firstAssets, secondAsset);
+}
+
+// export const floatingPlatformMovement = (scene, floatingPlatform) => {
+//   //Create Moving Platform
+//   if (scene.floatingPlatform.x >= 370) {
+//     scene.floatingPlatform.setVelocityX(-50);
+//   }
+//   else if (scene.floatingPlatform.x <= 300) {
+//     scene.floatingPlatform.setVelocityX(50);
+//   }
 // }

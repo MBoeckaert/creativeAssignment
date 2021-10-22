@@ -21,7 +21,9 @@ const config = {
             gravity: { y: 300 }
         }
     },
-    scene: [Boot, LoadingScreen, FirstLevel, LoadingLevelTwo, SecondLevel, LoadingLevelThree, ThirdLevel, WinnerScreen, FourthLevel]
+    scene: [Boot, LoadingScreen, FirstLevel, LoadingLevelTwo, SecondLevel, LoadingLevelThree, ThirdLevel, WinnerScreen, FourthLevel],
+    pixelArt: true,
+    roundPixels: true
 }
 
 let game = new Phaser.Game(config);
