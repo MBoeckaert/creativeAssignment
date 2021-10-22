@@ -4,12 +4,10 @@ export default class MainCharacter extends Phaser.Physics.Arcade.Sprite {
         config.scene.add.existing(this);
         config.scene.physics.add.existing(this);
 
-        this.setScale(0.5);
-        // this.refreshBody();
+        this.setScale(0.3);
+        this.refreshBody();
         this.setBounce(0.2);
         this.setCollideWorldBounds(true);
     }
-
-
 
 }
