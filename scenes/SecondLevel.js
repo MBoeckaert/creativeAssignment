@@ -27,7 +27,6 @@ export default class SecondLevel extends Phaser.Scene {
         this.playAgain.setOrigin(0.5, 0);
         this.playAgain.visible = false;
 
-        //create a hitzone BIG SPRITE
         this.hitNextLevel = this.physics.add.sprite(100, 135, `portal`);
         this.hitNextLevel.setScale(0.03);
 

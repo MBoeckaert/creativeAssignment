@@ -1,5 +1,3 @@
-// import Platform from "./classes/Platform.js";
-
 export default class Boot extends Phaser.Scene {
     constructor() {
         super({ key: `boot` })
@@ -29,11 +27,9 @@ export default class Boot extends Phaser.Scene {
         ]);
 
         this.load.on(`complete`, () => {
-            // this.scene.start(`play`);
             this.scene.start(`loadingscreen`);
         });
 
-        // console.log(Platform.add(5,6));
     }
 
     create() {
@@ -51,25 +47,5 @@ export default class Boot extends Phaser.Scene {
         music.loop = true;
         music.play();
         // music.pause();
-
-        this.creatingPlatforms();
-
-
     }
-
-    update() {
-
-    }
-
-    creatingPlatforms() {
-        //set floor platforms
-        this.platforms = this.physics.add.staticGroup();
-        this.platforms.create(128, 590, 'floor').setScale(2).refreshBody(); //refreshBody() doesn't work
-        this.platforms.create(544, 590, `floor`).setScale(2).refreshBody();
-        this.platforms.create(800, 590, `floor`).setScale(2).refreshBody();
-    }
-
 }
-//create class extends Entity
-//new entity in other scenes
-//learn.yorkcs.com space invaders

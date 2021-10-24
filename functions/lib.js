@@ -3,7 +3,7 @@ export const addBg = (bg) => {
 }
 
 export const levelText = (text, level) => {
-  text.add.text(20, 20, `level ${level}`, { fontSize: `16px`, fill: `#ffff` })
+  text.add.text(20, 20, `level ${level}`, { fontSize: `16px`, fill: `#ffff` });
 }
 
 // export const playerControls = (scene) => {

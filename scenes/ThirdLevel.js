@@ -28,7 +28,6 @@ export default class ThirdLevel extends Phaser.Scene {
         this.playAgain.setOrigin(0.5, 0);
         this.playAgain.visible = false;
 
-        //create a hitzone BIG SPRITE
         this.hitNextLevel = this.physics.add.sprite(425, 50, `male`);
         this.hitNextLevel.setScale(0.06);
 
@@ -94,11 +93,10 @@ export default class ThirdLevel extends Phaser.Scene {
         // nextLevel interactions
         this.physics.add.collider(this.hitNextLevel, this.platformGroup);
         this.physics.add.collider(this.hitNextLevel, this.fixedFloatingFloor);
-        // nextLevel interactions
+        // enemies interactions
         this.physics.add.collider(this.princess, this.monster, this.hitMonster, null, this);
         this.physics.add.collider(this.princess, this.fire, this.hitMonster, null, this);
-
-        //collision is going to level 2
+        // nextLevel interactions
         this.physics.add.collider(this.princess, this.hitNextLevel, this.youWin, null, this);
     }
 
