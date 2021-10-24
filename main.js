@@ -3,9 +3,7 @@
 import Boot from "./scenes/Boot.js";
 import LoadingScreen from "./scenes/LoadingScreen.js";
 import FirstLevel from "./scenes/FirstLevel.js";
-import LoadingLevelTwo from "./scenes/LoadingLevelTwo.js";
 import SecondLevel from "./scenes/SecondLevel.js";
-import LoadingLevelThree from "./scenes/LoadingLevelThree.js";
 import ThirdLevel from "./scenes/ThirdLevel.js";
 import WinnerScreen from "./scenes/WinnerScreen.js";
 
@@ -20,7 +18,7 @@ const config = {
             gravity: { y: 300 }
         }
     },
-    scene: [Boot, LoadingScreen, FirstLevel, LoadingLevelTwo, SecondLevel, LoadingLevelThree, ThirdLevel, WinnerScreen],
+    scene: [Boot, LoadingScreen, FirstLevel, SecondLevel, ThirdLevel, WinnerScreen],
     pixelArt: true,
     roundPixels: true
 }

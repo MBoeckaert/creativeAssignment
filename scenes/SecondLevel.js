@@ -169,7 +169,7 @@ export default class SecondLevel extends Phaser.Scene {
     }
 
     levelThree() {
-        this.scene.start(`textLoadlvl3`);
+        this.scene.start(`level3`);
     }
 
 

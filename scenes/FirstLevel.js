@@ -15,12 +15,15 @@ export default class FirstLevel extends Phaser.Scene {
         //load assets
         addBg(this);
         this.princess = new MainCharacter({ scene: this, x: 50, y: 425 });
+        // this.princess.playerControls;
         this.monster = new Monster({ scene: this, x: 680, y: 525 });
         this.platformGroup = new PlatformGroup(this);
         this.fire = new FireGroup(this);
         //all the text
         levelText(this, 1);
-        this.gameText1 = this.add.text(400, 200, `Save Mark!`, { fontSize: `32px`, fill: `#ffff` }).setOrigin(0.5);
+        this.gameText1 = this.add.text(400, 200, `Save Bobby!`, { fontSize: `32px`, fill: `#ffff` }).setOrigin(0.5);
+        this.controllerText = this.add.text(20, 60, `Controllers`, { fontSize: `16px`, fill: `#ffff` });
+        this.arrows = this.add.image(60, 90, `arrows`).setScale(0.15);
         this.gameText2 = this.add.text(400, 250, `Go through the portals and find him!`, { fontSize: `32px`, fill: `#ffff` }).setOrigin(0.5);
         this.gameText3 = this.add.text(400, 300, `Use arrowkeys to move & jump`, { fontSize: `32px`, fill: `#ffff` }).setOrigin(0.5);
         this.gameOverText = this.add.text(400, 300, `Game Over`, { fontSize: `128px`, fill: `#ff0000` }).setInteractive({ cursor: `pointer` }).setOrigin(0.5);
@@ -36,19 +39,21 @@ export default class FirstLevel extends Phaser.Scene {
 
         this.collidingInteractions();
         this.playerControls();
+        // playerControls(this);
         // this.playerAnimations();
 
-        // this.soundButton = this.game.add.button(this.game.world.centerX + 240, this.game.world.centerY - 290, 'sprites', this.toggleMute, this, 'sound-icon', 'sound-icon', 'sound-icon');
-        // this.soundButton.fixedToCamera = true;
-        // if (!this.game.sound.mute) {
-        //     this.soundButton.tint = 16777215;
-        // } else {
-        //     this.soundButton.tint = 16711680;
-        // }
+        //     this.soundButton = this.add.button(this.game.world.centerX + 240, this.game.world.centerY - 290, 'sprites', this.toggleMute, this, 'sound-icon', 'sound-icon', 'sound-icon');
+        //     this.soundButton.fixedToCamera = true;
+        //     if (!this.game.sound.mute) {
+        //         this.soundButton.tint = 16777215;
+        //     } else {
+        //         this.soundButton.tint = 16711680;
+        //     }
     }
 
     update() {
         this.playerMovement();
+        // playerMovement(this);
         this.floatingPlatformMovement();
         this.monsterMovement();
     }
@@ -83,20 +88,20 @@ export default class FirstLevel extends Phaser.Scene {
         this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     }
 
-    playerAnimations() {
-        this.anims.create({
-            key: `left`,
-            frames: this.anims.generateFrameNumbers(`princess`, { frames: [2, 3] }),
-            frameRate: 5,
-            repeat: -1
-        });
-        this.anims.create({
-            key: 'right',
-            frames: this.anims.generateFrameNumbers('princess', { frames: [0, 1] }),
-            frameRate: 5,
-            repeat: -1
-        });
-    }
+    // playerAnimations() {
+    //     this.anims.create({
+    //         key: `left`,
+    //         frames: this.anims.generateFrameNumbers(`princess`, { frames: [2, 3] }),
+    //         frameRate: 5,
+    //         repeat: -1
+    //     });
+    //     this.anims.create({
+    //         key: 'right',
+    //         frames: this.anims.generateFrameNumbers('princess', { frames: [0, 1] }),
+    //         frameRate: 5,
+    //         repeat: -1
+    //     });
+    // }
 
     playerMovement() {
         //create Player Movement
@@ -153,6 +158,6 @@ export default class FirstLevel extends Phaser.Scene {
     }
 
     levelTwo() {
-        this.scene.start(`textLoadlvl2`);
+        this.scene.start(`level2`);
     }
 }

@@ -11,12 +11,16 @@ export default class Boot extends Phaser.Scene {
         // this.load.spritesheet(`princessAll`, `assets/allChar.png`, {frameWidth: 32, frameHeight: 128});
         this.load.image(`monster`, `assets/monsters-0.png`);
         this.load.image(`fire`, `assets/fire.png`);
+        this.load.image(`arrows`, `assets/arrows.png`);
         this.load.image(`floor`, `assets/groundFloor.png`);
         this.load.image(`floatingFloor`, `assets/floatingFloor.png`);
         this.load.image(`smallFloat`, `assets/smallFloatingFloor.png`);
 
         this.load.image(`male`, `assets/malechar.png`, { frameWidth: 32, frameHeight: 128 });
         this.load.image(`portal`, `assets/portal.png`, { frameWidth: 32, frameHeight: 128 });
+
+        this.load.spritesheet(`playSound`, `assets/playSound.png`, { frameWidth: 32, frameHeight: 128 });
+        this.load.image(`muteSound`, `assets/muteSound.png`, { frameWidth: 32, frameHeight: 128 });
 
         //music
         this.load.audio('theme', [
@@ -43,8 +47,10 @@ export default class Boot extends Phaser.Scene {
 
         //music start
         const music = this.sound.add(`theme`);
+        // music.on(`pause`, listener);
         music.loop = true;
         music.play();
+        // music.pause();
 
         this.creatingPlatforms();
 
